@@ -11,16 +11,13 @@ public class Stapel {
         return (anzElemente == 0); 
     }
 
+    //füge Element hinzu
     public void push(int pInhalt) {
         
         if(anfang != null) {
-            Knoten zeiger = anfang;
-
-            while (zeiger.getNaechster() != null) {
-                zeiger = zeiger.getNaechster();
-            }
-            zeiger.setNaechster(new Knoten(pInhalt));
-
+            Knoten tempKnoten = anfang;
+            anfang = new Knoten(pInhalt);
+            anfang.setNaechster(tempKnoten);
         }
         else {
             anfang = new Knoten(pInhalt);
@@ -29,19 +26,15 @@ public class Stapel {
         anzElemente ++;
     }
 
+    //entferne oberstes element
     public int pop() {
         if(anfang != null) {
-            Knoten zeiger = anfang;
-            Knoten vorheriger = anfang;
-
-            while (zeiger.getNaechster() != null) {
-                vorheriger = zeiger;
-                zeiger = zeiger.getNaechster();
-            }
-            vorheriger.setNaechster(null);
-            anzElemente --;
-            return zeiger.getInhalt();
             
+            Knoten temKnoten = anfang; 
+            anfang = temKnoten.getNaechster();
+            anzElemente --;
+
+            return temKnoten.getInhalt();
 
         }
         else {
@@ -52,13 +45,8 @@ public class Stapel {
 
     public int top() {
         if(anfang != null) {
-            Knoten zeiger = anfang;
-
-            while (zeiger.getNaechster() != null) {
-                zeiger = zeiger.getNaechster();
-            }
-            return zeiger.getInhalt();
             
+            return anfang.getInhalt();
 
         }
         else {
